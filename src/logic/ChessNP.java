@@ -6,7 +6,7 @@ package logic;
  */
 public abstract class ChessNP extends Chess {
     @Override
-    protected final void initBoard(int n) {
+    protected void initBoard(int n) {
         board = new Boolean[size+1][size+1];
     }
 
