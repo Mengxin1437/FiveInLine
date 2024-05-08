@@ -24,4 +24,13 @@ public class Reversi extends ChessNP {
         //初始放置四个棋子
 
     }
+
+    @Override
+    public boolean isMovePositionOk(int x, int y) {
+        if(!super.isMovePositionOk(x, y)) return false;
+        boolean result = true;
+        //合法性判断
+
+        return result;
+    }
 }
