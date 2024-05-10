@@ -1,6 +1,5 @@
 package graphic.awt;
 
-import javax.tools.Tool;
 import java.awt.*;
 
 public class MyCanvas extends Canvas {
