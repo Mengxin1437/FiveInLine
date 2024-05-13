@@ -1,6 +1,8 @@
+import logic.FiveInLine;
+
 import java.util.Scanner;
 
-public class FiveInLineOnCommand extends FiveInLine{
+public class FiveInLineOnCommand extends FiveInLine {
     private static final String blackChessman="🔴";
     private static final String whiteChessman="🔵";
     private static final String boardCompent="➕";
@@ -41,7 +43,6 @@ public class FiveInLineOnCommand extends FiveInLine{
         System.out.println("-----------------------");
     }
 
-    @Override
     public void showBoard() {
         System.out.println("  壹贰叁肆伍陆柒捌玖拾屲亗岌岄岪峘");
         for(int i=4;i<size+4;i++){
@@ -59,26 +60,22 @@ public class FiveInLineOnCommand extends FiveInLine{
         }
     }
 
-    @Override
     public int getX() {
         String current = getTurn()?playerBlack:playerWhite;
-        System.out.print(current + "请输入落子的横坐标：");
+        System.out.print(current + "请输入落子所在的行：");
         return sc.nextInt();
     }
 
-    @Override
     public int getY() {
         String current = getTurn()?playerBlack:playerWhite;
-        System.out.print(current + "请输入落子的纵坐标：");
+        System.out.print(current + "请输入落子所在的列：");
         return sc.nextInt();
     }
 
-    @Override
     public void positionNotAllowedInfo() {
         System.out.println("落子位置不合法，请重新落子");
     }
 
-    @Override
     public void showWinner(Boolean result) {
         if(result.equals(true)){
             System.out.println(playerBlack+"胜利");
@@ -96,5 +93,24 @@ public class FiveInLineOnCommand extends FiveInLine{
         System.out.println("\t\t1.一人一步");
         System.out.println("\t\t2.无禁手");
         System.out.println("\t\t3.五子连线获胜");
+    }
+
+    public void gameLoop(){
+        showBoard(); //显示棋盘或更新界面
+        while (true){
+            int x = getX();//获取行的输入
+            int y = getY();//获取列的输入
+            if(isMovePositionOk(x, y)){
+                moveDown(x, y);
+                Boolean result = isWin(x, y);
+                showBoard();
+                if(result != null){
+                    showWinner(result);//显示胜利信息
+                    return;
+                }
+            }else{
+                positionNotAllowedInfo();//当输入的位置不合法时的提示信息
+            }
+        }
     }
 }
