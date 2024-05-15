@@ -6,15 +6,15 @@ public class MyCanvas extends Canvas {
     static Image desk = Toolkit.getDefaultToolkit().getImage("imgs/desk.png");
     static Image blackChess = Toolkit.getDefaultToolkit().getImage("imgs/black.png");
     static Image whiteChess = Toolkit.getDefaultToolkit().getImage("imgs/white.png");
-    static int UL = AwtShow.UL;
+    static int boardWidth = AwtShow.boardWidth;
     @Override
     public void paint(Graphics g) {
         super.paint(g);
 
-        g.drawImage(desk, 0, 0, 576*UL, 576*UL, this);
+        g.drawImage(desk, 0, 0, boardWidth, boardWidth, this);
 
         //绘制边框
-        g.drawRect(1, 1, 574*UL, 574*UL);
+        g.drawRect(1, 1, boardWidth-2, boardWidth-2);
 
         //绘制棋盘
         drawBoard(g, 19, 19);
@@ -28,12 +28,12 @@ public class MyCanvas extends Canvas {
         int horizontal = 0;
         int vertical = 0;
         for(int a = row ; a >= 0 ; a--){
-            g.drawLine(4*UL,4*UL+vertical,572*UL,4*UL+vertical);
-            vertical += 571*UL/row;
+            g.drawLine(4,4+vertical,boardWidth-5,4+vertical);
+            vertical += (boardWidth-7)/row;
         }
         for(int b = column ; b >= 0 ; b--){
-            g.drawLine(4*UL+horizontal,4*UL,4*UL+horizontal,571*UL);
-            horizontal += 571*UL/column;
+            g.drawLine(4+horizontal,4,4+horizontal,boardWidth-5);
+            horizontal += (boardWidth-7)/column;
         }
     }
 
