@@ -14,12 +14,13 @@ public class AwtShow {
         setCenterAndClose(mFrame, windowWidth, windowHeight);
         mFrame.setResizable(false); //设置窗口大小不可调
         mFrame.setLayout(null); //取消布局管理器
-        Canvas cv = new MyCanvas();
+        Integer row = 19, column = 19;
+        MyCanvas cv = new MyCanvas(row, column);
         cv.setBounds(72, 72, boardWidth, boardWidth);
         cv.setPreferredSize(new Dimension(boardWidth, boardWidth));
         cv.setLocation(72, 72);
         mFrame.add(cv);
-        MouseAdapter mouseAdapter = new MyMouseEvent();
+        MouseAdapter mouseAdapter = new MyMouseEvent(row, column, cv);
         cv.addMouseListener(mouseAdapter);
     }
 
