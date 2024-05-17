@@ -17,7 +17,7 @@ public class MyCanvas extends Canvas {
         g.drawRect(1, 1, boardWidth-2, boardWidth-2);
 
         //绘制棋盘
-        drawBoard(g, 19, 19);
+        drawBoard(g, 9, 9);
 
         //绘制棋子示例
         g.drawImage(blackChess, 10, 10, 40, 40, this);
@@ -25,15 +25,17 @@ public class MyCanvas extends Canvas {
     }
 
     public void drawBoard(Graphics g, int row, int column){
+        int arrV = (int) Math.round(boardWidth / 2.0 / row);
+        int arrH = (int) Math.round(boardWidth / 2.0 / column);
         int horizontal = 0;
         int vertical = 0;
-        for(int a = row ; a >= 0 ; a--){
-            g.drawLine(4,4+vertical,boardWidth-5,4+vertical);
-            vertical += (boardWidth-7)/row;
+        for(int a = 0; a<row; a++){
+            vertical = boardWidth * a / row; //先乘再做整除，精度更高
+            g.drawLine(arrH, arrV+vertical, arrH+boardWidth*(column-1)/column, arrV+vertical);
         }
-        for(int b = column ; b >= 0 ; b--){
-            g.drawLine(4+horizontal,4,4+horizontal,boardWidth-5);
-            horizontal += (boardWidth-7)/column;
+        for(int b = 0; b<column; b++){
+            horizontal = boardWidth * b / column;
+            g.drawLine(arrH+horizontal, arrV, arrH+horizontal, arrV+boardWidth*(row-1)/row);
         }
     }
 
