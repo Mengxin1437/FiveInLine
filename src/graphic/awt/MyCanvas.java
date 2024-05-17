@@ -45,8 +45,10 @@ public class MyCanvas extends Canvas {
      * 根据指定位置绘制一个棋子
      * @param g 可以绘图的对象
      * @param bn true黑棋 false白棋
+     * @r 棋子所在行
+     * @c 棋子所在列
      */
-    private void drawChessman(Graphics g, boolean bn){
+    private void drawChessman(Graphics g, boolean bn, int r, int c){
         //绘制棋子示例
         //g.drawImage(blackChess, 10, 10, 40, 40, this);
         //g.drawImage(whiteChess, 100, 100, 40, 40, this);
