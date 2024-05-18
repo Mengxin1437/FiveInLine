@@ -9,56 +9,62 @@ package logic;
  */
 public abstract class Chess {
     protected Boolean turn; //当前轮到黑方还是白方下棋
-    protected Boolean[][] board; //棋盘的状态
-    protected Integer size;//棋盘的大小
+    public Boolean[][] board; //棋盘的状态，遵循所见即所得
     protected Boolean winner; //胜利方
 
     public Boolean getTurn() {
         return turn;
     }
 
+    public Boolean[][] getBoard() {
+        return board;
+    }
+
     //初始化游戏
-    public void init(int n){
-        this.size = n;
+    public void init(int row, int column){
         winner = null; //初始化胜利者为空
         turn = true; //黑方先
         //初始化棋盘
-        initBoard(n);
+        initBoard(row, column);
     }
 
     //初始化棋盘
-    protected abstract void initBoard(int n);
+    protected void initBoard(int row, int column){
+        board = new Boolean[row][column];
+        for(int i=0; i<row; i++){
+            board[i] = new Boolean[column];
+        }
+    }
 
     /**
      * 需要用户在落子前进行判断是否合法 一般来说落子点必须在范围内并为空
      * 如果子类有新的要求则需要重写并调用super.isMovePositionOk来判断是否合法
-     * @param x 用户程序认为的横坐标[1,size]
-     * @param y 用户程序认为的纵坐标
+     * @param x 行 [0, row)
+     * @param y 列 [0, column)
      * @return true合法
      */
     public boolean isMovePositionOk(int x, int y){
         //判断范围是否合法
-        if(x<1 || x>size) return false;
-        if(y<1 || y>size) return false;
-        int realX = toRealX(x);
-        int realY = toRealY(y);
+        if(x<0 || x>=board.length) return false;
+        if(y<0 || y>=board[0].length) return false;
         //判断落子点是否为空
-        return board[realX][realY] == null;
+        return board[x][y] == null;
     }
 
-    protected abstract int toRealX(int x);
-    protected abstract int toRealY(int y);
+    /**
+     * 落子并交换回合
+     * @param x 行[0, row)
+     * @param y 列[0, column)
+     */
     public void moveDown(int x, int y){
-        int realX = toRealX(x);
-        int realY = toRealY(y);
-        board[realX][realY] = turn;
+        board[x][y] = turn;
         turn = !turn;
     }
 
     /**
      * 从落子点出发判断游戏是否结束
-     * @param x 用户程序认为的横坐标
-     * @param y 用户程序认为的纵坐标
+     * @param x 行 [0, row)
+     * @param y 列 [0, column)
      * @return null未结束 true黑方胜利 false白方胜利
      */
     public abstract Boolean isWin(int x, int y);

@@ -3,7 +3,7 @@ package logic;
 /**
  * 黑白棋
  */
-public class Reversi extends ChessNP {
+public class Reversi extends Chess {
     @Override
     public Boolean isWin(int x, int y) {
         //黑白棋的判断胜负方式
@@ -19,8 +19,8 @@ public class Reversi extends ChessNP {
     }
 
     @Override
-    protected void initBoard(int n) {
-        super.initBoard(n);
+    protected void initBoard(int row, int column) {
+        super.initBoard(row, column);
         //初始放置四个棋子
 
     }

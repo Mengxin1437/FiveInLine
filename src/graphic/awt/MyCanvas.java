@@ -9,7 +9,7 @@ public class MyCanvas extends Canvas {
     static int boardWidth = AwtShow.boardWidth;
     int arrV; //垂直偏移
     int arrH; //水平偏移
-
+    public Boolean winner;
     private Boolean[][] board; //对棋盘的引用 board.length表示棋盘行数 board[0].length表示棋盘的列数
 
     /**
@@ -41,6 +41,8 @@ public class MyCanvas extends Canvas {
                 }
             }
         }
+        if(winner!=null)
+            drawWinner(g);
     }
 
     public void drawBoardBackground(Graphics g){
@@ -78,11 +80,10 @@ public class MyCanvas extends Canvas {
     /**
      * 显示胜利或者失败信息
      * @param g 图形上下文
-     * @param bl true胜利 false失败
      */
-    public void drawWinner(Graphics g, boolean bl){
+    public void drawWinner(Graphics g){
         Font font = new Font("微软雅黑", Font.PLAIN, 30);
         g.setFont(font);
-        g.drawString(bl?"You Win":"You Lost", boardWidth/2-50, boardWidth/2);
+        g.drawString(winner?"黑方胜利":"白方胜利", boardWidth/2-50, boardWidth/2);
     }
 }
