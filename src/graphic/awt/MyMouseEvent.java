@@ -6,14 +6,10 @@ import java.awt.event.MouseEvent;
 
 public class MyMouseEvent extends MouseAdapter {
     static int boardWidth = AwtShow.boardWidth;
-    private Integer row; //棋盘行数
-    private Integer column; //棋盘列数
     private MyCanvas myCanvas;
     private Boolean turn = true;//test
-    private Boolean[][] board;//test
-    public MyMouseEvent(Integer row, Integer column, MyCanvas myCanvas,Boolean[][] board){
-        this.row = row;
-        this.column = column;
+    private Boolean[][] board;
+    public MyMouseEvent(MyCanvas myCanvas,Boolean[][] board){
         this.myCanvas = myCanvas;
         this.board = board;
 
@@ -24,6 +20,9 @@ public class MyMouseEvent extends MouseAdapter {
 
         Point pos = getPos(e);
         System.out.println(pos);
+
+        board[pos.x][pos.y] = turn;
+        turn = !turn;
 
         myCanvas.repaint();
     }
@@ -38,6 +37,8 @@ public class MyMouseEvent extends MouseAdapter {
         //示例:System.out.println(e.getX()+" "+e.getY());
         int x = e.getX();
         int y = e.getY();
+        int row = board.length;
+        int column = board[0].length;
         int arrV = (int) Math.round(boardWidth / 2.0 / row);
         int arrH = (int) Math.round(boardWidth / 2.0 / column);
 

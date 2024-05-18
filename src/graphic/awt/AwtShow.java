@@ -14,18 +14,18 @@ public class AwtShow {
         setCenterAndClose(mFrame, windowWidth, windowHeight);
         mFrame.setResizable(false); //设置窗口大小不可调
         mFrame.setLayout(null); //取消布局管理器
-        Integer row = 19, column = 19;
+        Integer row = 19, column = 15;
         //下面这里仅测试用
         Boolean[][] board = new Boolean[row][column];
         for(int i = 0; i<board.length; i++ ){
             board[i] = new Boolean[column];
         }
-        MyCanvas cv = new MyCanvas(row, column,board);
+        MyCanvas cv = new MyCanvas(board);
         cv.setBounds(72, 72, boardWidth, boardWidth);
         cv.setPreferredSize(new Dimension(boardWidth, boardWidth));
         cv.setLocation(72, 72);
         mFrame.add(cv);
-        MouseAdapter mouseAdapter = new MyMouseEvent(row, column, cv, board);
+        MouseAdapter mouseAdapter = new MyMouseEvent(cv, board);
         cv.addMouseListener(mouseAdapter);
     }
 

@@ -7,25 +7,19 @@ public class MyCanvas extends Canvas {
     static Image blackChess = Toolkit.getDefaultToolkit().getImage("imgs/black.png");
     static Image whiteChess = Toolkit.getDefaultToolkit().getImage("imgs/white.png");
     static int boardWidth = AwtShow.boardWidth;
-    private Integer row; //棋盘行数
-    private Integer column; //棋盘列数
-    int arrV ;
-    int arrH ;
+    int arrV; //垂直偏移
+    int arrH; //水平偏移
 
-    private Boolean[][] board;
+    private Boolean[][] board; //对棋盘的引用 board.length表示棋盘行数 board[0].length表示棋盘的列数
 
     /**
      * 构造方法
-     * @param row 棋盘的行数
-     * @param column 棋盘的列数
      * @param board 存储棋子位置信息的二维数组
      */
-    public MyCanvas(Integer row, Integer column, Boolean[][] board){
-        this.row = row;
-        this.column = column;
+    public MyCanvas(Boolean[][] board){
         this.board = board;
-        arrV = (int) Math.round(boardWidth / 2.0 / row);
-        arrH = (int) Math.round(boardWidth / 2.0 / column);
+        arrV = (int) Math.round(boardWidth / 2.0 / board.length);
+        arrH = (int) Math.round(boardWidth / 2.0 / board[0].length);
     }
 
     @Override
@@ -40,8 +34,8 @@ public class MyCanvas extends Canvas {
         //绘制棋盘
         drawBoardBackground(g);
 
-        for(int i = 0; i < row; i++){
-            for (int j = 0; j < column; j++){
+        for(int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[0].length; j++){
                 if(board[i][j]!=null){
                     drawChessman(g,board[i][j],i,j);
                 }
@@ -52,6 +46,8 @@ public class MyCanvas extends Canvas {
     public void drawBoardBackground(Graphics g){
         int horizontal = 0;
         int vertical = 0;
+        int row = board.length;
+        int column = board[0].length;
         //g.drawLine(arrH,arrV,(boardWidth*18/column)+arrH,(boardWidth*18/column)+arrH);
         for(int a = 0; a<row; a++){
             vertical = boardWidth * a / row; //先乘再做整除，精度更高
@@ -68,15 +64,15 @@ public class MyCanvas extends Canvas {
      * 根据指定位置绘制一个棋子
      * @param g 可以绘图的对象
      * @param bn true黑棋 false白棋
-     * @r 棋子所在行
-     * @c 棋子所在列
+     * @param r 棋子所在行
+     * @param c 棋子所在列
      */
     private void drawChessman(Graphics g, boolean bn, int r, int c){
-        int width,length;
-        width = boardWidth/column;
-        length = boardWidth/row;
-        g.drawImage(bn?blackChess:whiteChess,(boardWidth*c/column)+arrV-width/2,
-                (boardWidth*r/column)+arrH-length/2,width,length,this);
+        int row = board.length;
+        int column = board[0].length;
+        int width = boardWidth/Math.max(column, row);
+        g.drawImage(bn?blackChess:whiteChess,(boardWidth*c/column)+arrH-width/2,
+                (boardWidth*r/row)+arrV-width/2, width, width,this);
     }
 
     /**
