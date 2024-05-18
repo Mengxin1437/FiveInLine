@@ -13,6 +13,13 @@ public class MyCanvas extends Canvas {
     int arrH ;
 
     private Boolean[][] board;
+
+    /**
+     * 构造方法
+     * @param row 棋盘的行数
+     * @param column 棋盘的列数
+     * @param board 存储棋子位置信息的二维数组
+     */
     public MyCanvas(Integer row, Integer column, Boolean[][] board){
         this.row = row;
         this.column = column;
@@ -70,5 +77,16 @@ public class MyCanvas extends Canvas {
         length = boardWidth/row;
         g.drawImage(bn?blackChess:whiteChess,(boardWidth*c/column)+arrV-width/2,
                 (boardWidth*r/column)+arrH-length/2,width,length,this);
+    }
+
+    /**
+     * 显示胜利或者失败信息
+     * @param g 图形上下文
+     * @param bl true胜利 false失败
+     */
+    public void drawWinner(Graphics g, boolean bl){
+        Font font = new Font("微软雅黑", Font.PLAIN, 30);
+        g.setFont(font);
+        g.drawString(bl?"You Win":"You Lost", boardWidth/2-50, boardWidth/2);
     }
 }

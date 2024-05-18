@@ -23,10 +23,8 @@ public class MyMouseEvent extends MouseAdapter {
         super.mouseReleased(e);
 
         Point pos = getPos(e);
-        /*test below*/
-        board[pos.x][pos.y] = turn;
-        turn = !turn;
-        //myCanvas.drawBoard(board);
+        System.out.println(pos);
+
         myCanvas.repaint();
     }
 
@@ -35,8 +33,7 @@ public class MyMouseEvent extends MouseAdapter {
      * @param e 鼠标点击位置坐标
      * @return Point.x表示行 Point.y表示列
      */
-
-    public Point getPos(MouseEvent e){
+    private Point getPos(MouseEvent e){
         //使用e.getX();e.getY()获取横纵坐标并转化到棋盘的坐标
         //示例:System.out.println(e.getX()+" "+e.getY());
         int x = e.getX();
