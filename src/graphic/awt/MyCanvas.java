@@ -65,17 +65,10 @@ public class MyCanvas extends Canvas {
      * @c 棋子所在列
      */
     private void drawChessman(Graphics g, boolean bn, int r, int c){
-        //绘制棋子示例
-        //g.drawImage(blackChess, 10, 10, 40, 40, this);
-        //g.drawImage(whiteChess, 100, 100, 40, 40, this);
         int width,length;
         width = boardWidth/column;
         length = boardWidth/row;
         g.drawImage(bn?blackChess:whiteChess,(boardWidth*c/column)+arrV-width/2,
                 (boardWidth*r/column)+arrH-length/2,width,length,this);
-
     }
-
-
-
 }
