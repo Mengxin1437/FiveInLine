@@ -9,16 +9,14 @@ package logic;
  */
 public abstract class Chess {
     protected Boolean turn; //当前轮到黑方还是白方下棋
-    public Boolean[][] board; //棋盘的状态，遵循所见即所得
+    protected Boolean[][] board; //棋盘的状态，遵循所见即所得
     protected Boolean winner; //胜利方
 
     public Boolean getTurn() {
         return turn;
     }
 
-    public Boolean[][] getBoard() {
-        return board;
-    }
+    public Boolean[][] getBoard() { return board; }
 
     //初始化游戏
     public void init(int row, int column){

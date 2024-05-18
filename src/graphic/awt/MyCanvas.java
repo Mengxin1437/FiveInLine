@@ -3,23 +3,31 @@ package graphic.awt;
 import java.awt.*;
 
 public class MyCanvas extends Canvas {
-    static Image desk = Toolkit.getDefaultToolkit().getImage("imgs/desk.png");
-    static Image blackChess = Toolkit.getDefaultToolkit().getImage("imgs/black.png");
-    static Image whiteChess = Toolkit.getDefaultToolkit().getImage("imgs/white.png");
-    static int boardWidth = AwtShow.boardWidth;
-    int arrV; //垂直偏移
-    int arrH; //水平偏移
+    private static Image desk = Toolkit.getDefaultToolkit().getImage("imgs/desk.png");
+    private static Image blackChess = Toolkit.getDefaultToolkit().getImage("imgs/black.png");
+    private static Image whiteChess = Toolkit.getDefaultToolkit().getImage("imgs/white.png");
+    private int boardWidth;
+    private int arrV; //垂直偏移
+    private int arrH; //水平偏移
     public Boolean winner;
     private Boolean[][] board; //对棋盘的引用 board.length表示棋盘行数 board[0].length表示棋盘的列数
+
+    public int getBoardWidth() {
+        return boardWidth;
+    }
 
     /**
      * 构造方法
      * @param board 存储棋子位置信息的二维数组
      */
-    public MyCanvas(Boolean[][] board){
+    public MyCanvas(Boolean[][] board, int boardWidth){
         this.board = board;
+        this.boardWidth = boardWidth;
         arrV = (int) Math.round(boardWidth / 2.0 / board.length);
         arrH = (int) Math.round(boardWidth / 2.0 / board[0].length);
+        this.setBounds(72, 72, boardWidth, boardWidth);
+        this.setPreferredSize(new Dimension(boardWidth, boardWidth));
+        this.setLocation(72, 72);
     }
 
     @Override
@@ -45,7 +53,7 @@ public class MyCanvas extends Canvas {
             drawWinner(g);
     }
 
-    public void drawBoardBackground(Graphics g){
+    private void drawBoardBackground(Graphics g){
         int horizontal = 0;
         int vertical = 0;
         int row = board.length;
@@ -81,7 +89,7 @@ public class MyCanvas extends Canvas {
      * 显示胜利或者失败信息
      * @param g 图形上下文
      */
-    public void drawWinner(Graphics g){
+    private void drawWinner(Graphics g){
         Font font = new Font("微软雅黑", Font.PLAIN, 30);
         g.setFont(font);
         g.drawString(winner?"黑方胜利":"白方胜利", boardWidth/2-50, boardWidth/2);

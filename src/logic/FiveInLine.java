@@ -3,7 +3,7 @@ package logic;
 /**
  * 实现五子棋的逻辑的抽象类
  */
-public abstract class FiveInLine extends Chess {
+public class FiveInLine extends Chess {
     //如果五子棋要求有禁手需要重写isMovePositionOk方法
 
     /**
