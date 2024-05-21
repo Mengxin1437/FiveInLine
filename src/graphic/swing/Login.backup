@@ -1,0 +1,3 @@
+tfUsername = new RoundTextField("用户名", 25);
+tfPassword = new RoundTextField("密码", 25);
+lbHead = new Headshot(this);
