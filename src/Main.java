@@ -1,6 +1,8 @@
 import graphic.awt.AwtShow;
 import logic.Chess;
 import logic.FiveInLine;
+import logic.Go;
+import logic.Reversi;
 
 import java.util.Scanner;
 
@@ -12,8 +14,12 @@ public class Main {
         Chess chess=null;
         switch (choice){
             case 2:
+                chess = new Reversi();
+                chess.init(10, 10);
                 break;
             case 3:
+                chess = new Go();
+                chess.init(19, 19);
                 break;
             default: case 1:
                 chess = new FiveInLine();
