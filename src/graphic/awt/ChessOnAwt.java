@@ -25,6 +25,13 @@ public class ChessOnAwt implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if(!reaction) return;
+        //鼠标右键撤销
+        if(e.getButton() == MouseEvent.BUTTON3){
+            chess.cancelOneStep();
+            myCanvas.repaint();
+            return;
+        }
+
         Point pos = getPos(e);
 //        System.out.println(pos);
 

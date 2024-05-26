@@ -96,8 +96,10 @@ public class Go extends Chess{
                 HashSet<Point> tribe = getTribe(p.x, p.y);
                 HashSet<Point> gas = getGas(tribe);
                 if(gas.isEmpty()){ //敌方棋子没气了
+                    ArrayList<Operation> opts = operations.getLast();
                     //提子
                     for(Point pt: tribe){
+                        opts.add(new Operation(pt, board[pt.x][pt.y]));
                         board[pt.x][pt.y] = null;
                     }
                     // 被提的棋子只有一个时可能出现禁着点
