@@ -29,6 +29,7 @@ public class AwtShow {
         int scWidth = screenSize.width;
         int scHeight= screenSize.height;
         frame.setSize(width, height);
+        frame.setAlwaysOnTop(true); //后面可以去掉这行
         frame.setLocation((scWidth-width)/2, (scHeight-height)/2);
         frame.setVisible(true);
         frame.addWindowListener(new WindowAdapter() {

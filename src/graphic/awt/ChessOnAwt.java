@@ -26,7 +26,7 @@ public class ChessOnAwt implements MouseListener {
     public void mouseReleased(MouseEvent e) {
         if(!reaction) return;
         Point pos = getPos(e);
-        System.out.println(pos);
+//        System.out.println(pos);
 
         int x = pos.x;
         int y = pos.y;

@@ -68,6 +68,27 @@ public class MyCanvas extends Canvas {
             horizontal = boardWidth * b / column;
             g.drawLine(arrH+horizontal, arrV, arrH+horizontal, arrV+boardWidth*(row-1)/row);
         }
+
+        //绘制角上4个星位
+        int r = row>=9&&row<13 ? 2 : 3;
+        int c = column>=9&&column<13 ? 2 : 3;
+        drawBlackPoint(g, r, c);
+        drawBlackPoint(g, r, column-c-1);
+        drawBlackPoint(g, row-r-1, c);
+        drawBlackPoint(g, row-r-1, column-c-1);
+
+        if(row%2==1 && column%2==1){
+            //绘制天元
+            drawBlackPoint(g, row/2, column/2);
+
+            //绘制星位之间的中点
+            if(row>=15 && column>=15){
+                drawBlackPoint(g, r, column/2);
+                drawBlackPoint(g, row/2, c);
+                drawBlackPoint(g, row/2, column-c-1);
+                drawBlackPoint(g, row-r-1, column/2);
+            }
+        }
     }
 
     /**
@@ -83,6 +104,17 @@ public class MyCanvas extends Canvas {
         int width = boardWidth/Math.max(column, row);
         g.drawImage(bn?blackChess:whiteChess,(boardWidth*c/column)+arrH-width/2,
                 (boardWidth*r/row)+arrV-width/2, width, width,this);
+    }
+
+    private static final int radius = 8; //黑色圆点的半径
+    /**
+     * 绘制黑圆点
+     */
+    private void drawBlackPoint(Graphics g, int r, int c){
+        int row = board.length;
+        int column = board[0].length;
+        g.fillRect((boardWidth*c/column)+arrH-radius/2,
+                (boardWidth*r/row)+arrV-radius/2, radius, radius);
     }
 
     /**
