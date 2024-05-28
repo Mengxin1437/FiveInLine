@@ -14,14 +14,8 @@ public abstract class Chess {
     protected Boolean turn; //当前轮到黑方还是白方下棋
     protected Boolean[][] board; //棋盘的状态，遵循所见即所得
     protected Boolean winner; //胜利方
-
-    public Boolean getWinner() {
-        return winner;
-    }
-
     //用于存储每一步的若干操作
     protected LinkedList<ArrayList<Operation>> operations;
-    public Point previousPoint; //上一步落子位置
 
     public Boolean getTurn() {
         return turn;
@@ -31,7 +25,6 @@ public abstract class Chess {
 
     //初始化游戏
     public void init(int row, int column){
-        previousPoint = null;
         operations = new LinkedList<>();
         winner = null; //初始化胜利者为空
         turn = true; //黑方先
@@ -73,14 +66,6 @@ public abstract class Chess {
         }
         turn = !turn;
         operations.removeLast();
-        //回滚最后一步下的棋的位置
-        if(operations.isEmpty()) {
-            previousPoint = null;
-        }else {
-            opts = operations.getLast();
-            Operation ot = opts.get(0);
-            previousPoint = ot.p;
-        }
     }
 
     /**
@@ -90,9 +75,8 @@ public abstract class Chess {
      */
     public void moveDown(int x, int y){
         operations.add(new ArrayList<>());
-        previousPoint = new Point(x, y);
         //记录棋盘变化点之前的状态
-        operations.getLast().add(new Operation(previousPoint, board[x][y]));
+        operations.getLast().add(new Operation(new Point(x, y), board[x][y]));
         board[x][y] = turn;
         turn = !turn;
     }

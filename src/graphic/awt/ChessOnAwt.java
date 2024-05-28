@@ -7,8 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ChessOnAwt implements MouseListener {
-    private final MyCanvas myCanvas;
-    private final Chess chess;
+    private MyCanvas myCanvas;
+    private Chess chess;
     Boolean reaction = true;
 
     public ChessOnAwt(MyCanvas myCanvas, Chess chess) {
@@ -43,6 +43,7 @@ public class ChessOnAwt implements MouseListener {
             Boolean result = chess.isWin(x, y);
             if(result != null){
                 System.out.println((result?"黑方":"白方") + "胜利");
+                myCanvas.winner = result;
                 myCanvas.repaint();
                 reaction = false;
             }
@@ -63,6 +64,8 @@ public class ChessOnAwt implements MouseListener {
      * @return Point.x表示行 Point.y表示列
      */
     private Point getPos(MouseEvent e){
+        //使用e.getX();e.getY()获取横纵坐标并转化到棋盘的坐标
+        //示例:System.out.println(e.getX()+" "+e.getY());
         int x = e.getX();
         int y = e.getY();
         int row = chess.getBoard().length;
