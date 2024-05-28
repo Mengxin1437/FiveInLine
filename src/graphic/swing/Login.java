@@ -4,6 +4,11 @@
 
 package graphic.swing;
 
+import Xinxi.src.GameStorage;
+import lianjei.Client;
+import lianjei.Qidong;
+import lianjei.Server;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -33,6 +38,10 @@ public class Login extends JFrame {
         Container container = this.getContentPane();
         CardLayout cardLayout = (CardLayout)container.getLayout();
         cardLayout.next(container);
+        String chosenImage = lbHead.getText();
+        String username = tfUsername.getText();
+        String password = tfPassword.getText();
+        GameStorage.userStorage(username,password);
     }
 
     private void btnBack(ActionEvent e) {
@@ -41,15 +50,36 @@ public class Login extends JFrame {
         cardLayout.previous(container);
     }
 
+    private void juyuwangduizhan(ActionEvent e) {
+        // TODO add your code here
+        new Qidong().setVisible(true);
+        Server server=new Server();
+        server.startServer();
+        Client client=new Client();
+        client.startClient();
+    }
+
+    public boolean radioButton1(ActionEvent e) {
+        // TODO add your code here
+        if (radioButton1.isSelected()) {
+            // 执行与你的单选按钮相关的操作
+            return true; // 或者根据你的逻辑返回 true 或 false
+        } else {
+            return false;
+        }
+    }
+
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+        // Generated using JFormDesigner Evaluation license - 贾皓天
         panel1 = new JPanel();
         btnClose = new JButton();
         btnMinimize = new JButton();
-        tfUsername = new RoundTextField("用户名", 25);
-        tfPassword = new RoundTextField("密码", 25);
-        lbHead = new Headshot(this);
+        tfUsername = new JTextField();
+        tfPassword = new JTextField();
+        lbHead = new JLabel();
         checkBox1 = new JCheckBox();
         checkBox2 = new JCheckBox();
         btnLogin = new JButton();
@@ -75,6 +105,12 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setPreferredSize(new Dimension(300, 420));
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
             panel1.setLayout(null);
 
             //---- btnClose ----
@@ -149,7 +185,7 @@ public class Login extends JFrame {
             background.setPreferredSize(new Dimension(300, 420));
             background.setIcon(new ImageIcon(getClass().getResource("/R-C.gif")));
             panel1.add(background);
-            background.setBounds(0, -17, 330, 455);
+            background.setBounds(5, -20, 330, 455);
 
             {
                 // compute preferred size
@@ -210,6 +246,7 @@ public class Login extends JFrame {
             button2.setPreferredSize(new Dimension(100, 30));
             button2.setBorder(null);
             button2.setBorderPainted(false);
+            button2.addActionListener(e -> juyuwangduizhan(e));
             panel2.add(button2);
             button2.setBounds(105, 260, 100, 30);
 
@@ -219,6 +256,7 @@ public class Login extends JFrame {
             radioButton1.setBackground(new Color(0x000d4b7c, true));
             radioButton1.setFocusPainted(false);
             radioButton1.setSelected(true);
+            radioButton1.addActionListener(e -> radioButton1(e));
             panel2.add(radioButton1);
             radioButton1.setBounds(75, 140, 61, 21);
 
@@ -273,6 +311,7 @@ public class Login extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    // Generated using JFormDesigner Evaluation license - 贾皓天
     private JPanel panel1;
     private JButton btnClose;
     private JButton btnMinimize;

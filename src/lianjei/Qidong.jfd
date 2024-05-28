@@ -1,0 +1,27 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space ::191:x, comp button1:::p::p, space :p:190:p}, comp textField1::t::463:x}"
+			"$verticalGroup": "par l {seq t {space :p:44:p, comp textField1:::p:121:p, space ::39:x, comp button1:::p::p, space :p:55:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "取消匹配"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "quxiaopipei", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+				"text": "匹配中.......请耐心等待"
+				"font": new java.awt.Font( "Microsoft YaHei UI", 3, 24 )
+				"foreground": new java.awt.Color( 153, 153, 0, 255 )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 155, 30 )
+			"size": new java.awt.Dimension( 465, 320 )
+		} )
+	}
+}
