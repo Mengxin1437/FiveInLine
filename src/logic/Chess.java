@@ -97,6 +97,7 @@ public abstract class Chess {
         turn = !turn;
     }
 
+
     /**
      * 从落子点出发判断游戏是否结束
      * @param x 行 [0, row)
