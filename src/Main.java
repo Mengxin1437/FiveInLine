@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        game();
+    }
+    public static void game() {
         System.out.println("请选择游戏类型：1.五子棋 2.黑白棋 3.围棋");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
@@ -28,5 +31,6 @@ public class Main {
         }
         if(chess != null)
             new AwtShow(chess);
+
     }
 }
