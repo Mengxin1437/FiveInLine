@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 import java.io.IOException;
-public class Main {
+public class Main2 {
     public static void main(String[] args) throws IOException {
         GameStorage gameStorage = new GameStorage();
         System.out.println("请选择游戏类型：1.五子棋 2.黑白棋 3.围棋");
@@ -19,7 +19,7 @@ public class Main {
         int choice = sc.nextInt();
         Chess chess=null;
         //得到用户信息
-        User user = gameStorage.loadUser(".\\filename");
+        User user = gameStorage.loadUser(".\\filename2");
         switch (choice){
             case 2:
                 chess = new Reversi();
@@ -44,5 +44,3 @@ public class Main {
 
 
 }
-
-

@@ -1,4 +1,7 @@
 package Xinxi.src;
+import graphic.awt.ChessOnAwt;
+import logic.Chess;
+
 import java.io.Serializable;
 import java.io.*;
 import java.io.Serializable;
@@ -18,11 +21,18 @@ import java.io.*;
         private int totalGames;//游戏总次数
         private int wonGames;//胜利次数
         private double winRate;//胜率
-        private  enum gameType{
-            FIVE_IN_LINE,//五子棋
-            REVERSI,//黑白棋
-            GO,//围棋
+
+        //private enum gameType{
+        //    FIVE_IN_LINE,//五子棋
+        //    REVERSI,//黑白棋
+        //    GO,//围棋
+        //}
+        private Chess type;
+
+        public void setType(Chess type) {
+            this.type = type;
         }
+
         public User() {
         }
         public User(String username, String password) {
@@ -37,9 +47,7 @@ import java.io.*;
             }
         }
 
-        public static long getSerialVersionUID() {
-            return serialVersionUID;
-        }
+        public static long getSerialVersionUID() {return serialVersionUID;}
 
         public String getUsername() {
             return username;

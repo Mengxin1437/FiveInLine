@@ -9,6 +9,7 @@ import logic.FiveInLine;
 import java.awt.event.ActionEvent;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 
 class GameThread extends Thread {
     private DatagramSocket socket;
@@ -34,8 +35,8 @@ class GameThread extends Thread {
             Chess chess=null;
             chess = new FiveInLine();
             chess.init(19, 19);
-            if(chess != null)
-                new AwtShow(chess);
+            //if(chess != null)
+               // new AwtShow(chess,socket,this);
 
 
         }

@@ -1,19 +1,38 @@
 package graphic.awt;
 
-import logic.Chess;
+import graphic.Message;
+import graphic.Pos;
+import graphic.Thread.wUserThread;
+import lianjei.ClientThread;
+import logic.Chess ;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.* ;
+import java.awt.event.MouseEvent ;
+import java.awt.event.MouseListener ;
+import java.io.IOException ;
+import java.io.ObjectOutputStream ;
+import java.net.Socket ;
 
 public class ChessOnAwt implements MouseListener {
-    private final MyCanvas myCanvas;
-    private final Chess chess;
-    Boolean reaction = true;
+    private MyCanvas myCanvas ;
+    private Chess chess ;
+    Boolean reaction = true ;
 
-    public ChessOnAwt(MyCanvas myCanvas, Chess chess) {
-        this.myCanvas = myCanvas;
-        this.chess = chess;
+
+    private ObjectOutputStream out ;
+
+    private Socket socket = null ;
+
+    private wUserThread userThread ;
+    private ClientThread clientThread;
+
+    public ChessOnAwt(MyCanvas myCanvas, Chess chess, Thread userThread) {
+        this.myCanvas = myCanvas ;
+        this.chess = chess ;
+        this.userThread = (wUserThread)userThread ;
+        this.userThread.setMyCanvas(myCanvas) ;
+        this.userThread.setChessOnAwt(this) ;
+        socket = this.userThread.getSocket();
     }
 
     @Override
@@ -22,34 +41,42 @@ public class ChessOnAwt implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {}
 
+
+    private Boolean keyi = false;
     @Override
     public void mouseReleased(MouseEvent e) {
+        //方法执行条件，当用户线程UserThread将keyi设置为true时方法可以继续执行
+        if(!keyi) return;
         if(!reaction) return;
-        //鼠标右键撤销
-        if(e.getButton() == MouseEvent.BUTTON3){
-            chess.cancelOneStep();
-            myCanvas.repaint();
-            return;
-        }
-
         Point pos = getPos(e);
-//        System.out.println(pos);
-
+        System.out.println(pos);
         int x = pos.x;
         int y = pos.y;
-        if(chess.isMovePositionOk(x, y)){
-            chess.moveDown(x, y);
-            myCanvas.repaint();
-            Boolean result = chess.isWin(x, y);
-            if(result != null){
-                System.out.println((result?"黑方":"白方") + "胜利");
+        if(keyi){
+            if(chess.isMovePositionOk(x, y)){
+                try{
+                    out = new ObjectOutputStream(socket.getOutputStream()) ;
+                    out.writeObject(pos);
+                    out.flush();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                chess.moveDown(x, y);
                 myCanvas.repaint();
-                reaction = false;
-            }
-        }else{
+                Boolean result = chess.isWin(x, y);
+                if(result != null){
+                    System.out.println((result?"黑方":"白方") + "胜利");
+                    myCanvas.repaint();
+                    reaction = false;
+                }
+                keyi = false;
+            }else{
 //            positionNotAllowedInfo();//当输入的位置不合法时的提示信息
+            }
+            //将keyi设置为false，继续等待UserThread
         }
     }
+
 
     @Override
     public void mouseEntered(MouseEvent e) {}
@@ -63,6 +90,8 @@ public class ChessOnAwt implements MouseListener {
      * @return Point.x表示行 Point.y表示列
      */
     private Point getPos(MouseEvent e){
+        //使用e.getX();e.getY()获取横纵坐标并转化到棋盘的坐标
+        //示例:System.out.println(e.getX()+" "+e.getY());
         int x = e.getX();
         int y = e.getY();
         int row = chess.getBoard().length;
@@ -74,5 +103,12 @@ public class ChessOnAwt implements MouseListener {
         int a = (int)Math.round(((y - arrV) * row) / (double)myCanvas.getBoardWidth());
 
         return new Point(a,b);
+    }
+
+    public void setReaction(Boolean reaction) {
+        this.reaction = reaction;
+    }
+    public void setKeyi(Boolean keyi){
+        this.keyi = keyi;
     }
 }

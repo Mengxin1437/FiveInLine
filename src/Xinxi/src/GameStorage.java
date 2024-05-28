@@ -52,14 +52,14 @@ public  class GameStorage {
             User user = new User(username, password);
             user.setId(1);//设置用户唯一id
             // 保存用户
-            saveUser(user, ".\\filename");
+            saveUser(user, ".\\filename2");
             // 加载用户
-            User loadedUser = loadUser(".\\filename");
+            User loadedUser = loadUser(".\\filename2");
             // 更新游戏统计
             if(loadedUser!=null) {
                 loadedUser.updateGameStats(true); // 假设赢了一场五子棋游戏
                 // 再次保存
-                saveUser(loadedUser, ".\\filename");
+                saveUser(loadedUser, ".\\filename2");
             }
             else {
                 System.out.println("User not found.");
