@@ -13,7 +13,7 @@ public class AwtShow {
         setCenterAndClose(mFrame, windowWidth, windowHeight);
         mFrame.setResizable(false); //设置窗口大小不可调
         mFrame.setLayout(null); //取消布局管理器
-        MyCanvas cv = new MyCanvas(chess.getBoard(), boardWidth);
+        MyCanvas cv = new MyCanvas(chess, boardWidth);
 
         mFrame.add(cv);
         MouseListener chessOnAwt = new ChessOnAwt(cv, chess);
