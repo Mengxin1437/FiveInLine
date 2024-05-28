@@ -178,7 +178,7 @@ public class Login extends JFrame {
             background.setPreferredSize(new Dimension(300, 420));
             background.setIcon(new ImageIcon(getClass().getResource("/R-C.gif")));
             panel1.add(background);
-            background.setBounds(5, -20, 330, 455);
+            background.setBounds(0, -17, 330, 455);
 
             {
                 // compute preferred size
@@ -251,7 +251,7 @@ public class Login extends JFrame {
             radioButton1.setSelected(true);
             radioButton1.addActionListener(e -> radioButton1(e));
             panel2.add(radioButton1);
-            radioButton1.setBounds(75, 140, 61, 21);
+            radioButton1.setBounds(75, 140, 70, 21);
 
             //---- radioButton2 ----
             radioButton2.setText("\u9ed1\u767d\u68cb");
@@ -259,7 +259,7 @@ public class Login extends JFrame {
             radioButton2.setBackground(new Color(0x000d4b7c, true));
             radioButton2.setFocusPainted(false);
             panel2.add(radioButton2);
-            radioButton2.setBounds(180, 140, 61, 21);
+            radioButton2.setBounds(180, 140, 70, 21);
 
             //---- btnBack ----
             btnBack.setText("\u2190\u8fd4\u56de");
@@ -269,7 +269,7 @@ public class Login extends JFrame {
             btnBack.setBorderPainted(false);
             btnBack.addActionListener(e -> btnBack(e));
             panel2.add(btnBack);
-            btnBack.setBounds(new Rectangle(new Point(0, 390), btnBack.getPreferredSize()));
+            btnBack.setBounds(0, 390, 70, btnBack.getPreferredSize().height);
 
             //---- background2 ----
             background2.setPreferredSize(new Dimension(300, 420));
