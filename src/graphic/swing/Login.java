@@ -4,6 +4,8 @@
 
 package graphic.swing;
 
+import Xinxi.src.GameStorage;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -33,6 +35,10 @@ public class Login extends JFrame {
         Container container = this.getContentPane();
         CardLayout cardLayout = (CardLayout)container.getLayout();
         cardLayout.next(container);
+        String chosenImage = lbHead.getText();
+        String username = tfUsername.getText();
+        String password = tfPassword.getText();
+        GameStorage.userStorage(username,password);
     }
 
     private void btnBack(ActionEvent e) {
@@ -44,12 +50,13 @@ public class Login extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+        // Generated using JFormDesigner Evaluation license - zhj
         panel1 = new JPanel();
         btnClose = new JButton();
         btnMinimize = new JButton();
-        tfUsername = new RoundTextField("用户名", 25);
-        tfPassword = new RoundTextField("密码", 25);
-        lbHead = new Headshot(this);
+        tfUsername = new JTextField();
+        tfPassword = new JTextField();
+        lbHead = new JLabel();
         checkBox1 = new JCheckBox();
         checkBox2 = new JCheckBox();
         btnLogin = new JButton();
@@ -75,6 +82,12 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setPreferredSize(new Dimension(300, 420));
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
+            EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing
+            . border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,
+            java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
+            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )
+            throw new RuntimeException( ) ;} } );
             panel1.setLayout(null);
 
             //---- btnClose ----
@@ -149,7 +162,7 @@ public class Login extends JFrame {
             background.setPreferredSize(new Dimension(300, 420));
             background.setIcon(new ImageIcon(getClass().getResource("/R-C.gif")));
             panel1.add(background);
-            background.setBounds(0, -17, 330, 455);
+            background.setBounds(5, -20, 330, 455);
 
             {
                 // compute preferred size
@@ -273,6 +286,7 @@ public class Login extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    // Generated using JFormDesigner Evaluation license - zhj
     private JPanel panel1;
     private JButton btnClose;
     private JButton btnMinimize;
