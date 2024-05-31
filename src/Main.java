@@ -1,12 +1,9 @@
-import Xinxi.src.GameStorage;
-import Xinxi.src.User;
 import graphic.awt.AwtShow;
 import logic.Chess;
 import logic.FiveInLine;
 import logic.Go;
 import logic.Reversi;
 
-import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -32,8 +29,6 @@ public class Main {
         }
         if (chess != null)
             new AwtShow(chess);
-
-
     }
 
 
