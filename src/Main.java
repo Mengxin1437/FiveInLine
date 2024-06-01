@@ -1,3 +1,6 @@
+import Xinxi.src.GameStorage;
+import Xinxi.src.User;
+import lianjei.wUserThread;
 import graphic.awt.AwtShow;
 import logic.Chess;
 import logic.FiveInLine;
@@ -6,30 +9,40 @@ import logic.Reversi;
 
 import java.util.Scanner;
 
+
+import java.io.IOException;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        GameStorage gameStorage = new GameStorage();
         System.out.println("请选择游戏类型：1.五子棋 2.黑白棋 3.围棋");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
-        Chess chess = null;
-        switch (choice) {
+        Chess chess=null;
+        //得到用户信息
+        User user = gameStorage.loadUser(".\\filename");
+        switch (choice){
             case 2:
                 chess = new Reversi();
-                chess.init(8, 8);
+                chess.init(10, 10);
                 break;
             case 3:
                 chess = new Go();
                 chess.init(19, 19);
                 break;
-            default:
-            case 1:
+            default: case 1:
                 chess = new FiveInLine();
                 chess.init(19, 19);
                 break;
         }
-        if (chess != null)
-            new AwtShow(chess);
+        user.setType(chess);
+        //启动用户线程
+        Thread userThread = new wUserThread(chess, user);
+        userThread.start();
+        if(chess != null)
+            new AwtShow(chess, userThread);
     }
 
 
 }
+
+

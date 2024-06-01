@@ -15,7 +15,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textField1"
-				"text": "匹配中.......请耐心等待"
+				"text": "创建成功请耐心等待玩家加入......."
 				"font": new java.awt.Font( "Microsoft YaHei UI", 3, 24 )
 				"foreground": new java.awt.Color( 153, 153, 0, 255 )
 			} )

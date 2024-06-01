@@ -22,20 +22,16 @@ class GameThread extends Thread {
         this.data = data;
     }
 
+    public GameThread() {
+    }
+
+
     @Override
     public void run() {
-        Qidong qidong = new Qidong();
 
-            qidong.dispose();
 
         // 在这里实现游戏逻辑
-        Login login = new Login();
-        if (login.radioButton1(e)){
-            Chess chess=null;
-            chess = new FiveInLine();
-            chess.init(19, 19);
-            if(chess != null)
-                new AwtShow(chess);
+        System.out.println("youxikaishi");
 
 
         }
@@ -43,4 +39,4 @@ class GameThread extends Thread {
 
 
     }
-}
+

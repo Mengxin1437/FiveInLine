@@ -8,80 +8,53 @@ import graphic.Message;
 import graphic.awt.ChessOnAwt;
 import graphic.awt.MyCanvas;
 import logic.Chess;
-import logic.FiveInLine;
-import logic.Reversi;
 
 import java.awt.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ClientThread extends Thread{
+public class wUserThread extends Thread{
     Socket socket;
     Chess chess;
-    Client client;
+    User user;
     ChessOnAwt chessOnAwt;
     MyCanvas myCanvas;
     Message message;
     Message dmessage;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    String ip;
-    int port;
-    public ClientThread(Chess chess, Client client) throws IOException {
-
-
-
+    public wUserThread(Chess chess, User user) throws IOException {
+        socket = new Socket("bj.frp.one", 37283);
         this.chess = chess;
-        this.client= client;
-    }
-    public ClientThread(String ip,int port,Chess chess){
-        this.port = port;
-        this.ip = ip;
-        this.chess = chess;
-        try {
-            socket = new Socket(ip, port);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.user = user;
     }
 
     @Override
     public void run() {
         try {
             in = new ObjectInputStream(socket.getInputStream());
-            System.out.println("65165416549649");
-           // in = new ObjectInputStream(socket.getInputStream());
-            System.out.println("65165416549649");
             out = new ObjectOutputStream(socket.getOutputStream());
-            System.out.println("65165416549649");
-           // System.out.println(client.getUsername());
-           // message = new Message(user.getUsername());
+            System.out.println(user.getUsername());
+            message = new Message(user.getUsername());
             //向服务端上传用户基本信息
-           // out.writeObject(message);
-//            System.out.println("111");
-      //      String a = (String) in.readObject();
-     //       System.out.println(a);
-     //       message = (Message) in.readObject();
+            out.writeObject(message);
+            out.flush();
+            System.out.println("111");
+            String a = (String) in.readObject();
+            System.out.println(a);
+            message = (Message) in.readObject();
             //等待服务端传输对方的下一步，执行完毕将ChessOnAwt实例的keyi改为true，令其能够进行下一步
             while (true){
                 System.out.println("222");
-                System.out.println("65165416549649");
-
-                System.out.println("65165416549649");
                 Point pos = (Point) in.readObject();
-                System.out.println("65165416549649");
-                System.out.println("?????");
 
+                System.out.println("?????");
                 if(pos == null){
                     chessOnAwt.setKeyi(true);
                 }
-
                 else{
-                    System.out.println(pos.x);
-                    System.out.println(pos.y);
                     int x = pos.x;
                     int y = pos.y;
                     if(chess.isMovePositionOk(x, y)){

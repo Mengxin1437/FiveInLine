@@ -46,7 +46,7 @@ public class Qidong extends JFrame {
         button1.addActionListener(e -> quxiaopipei(e));
 
         //---- textField1 ----
-        textField1.setText("\u5339\u914d\u4e2d.......\u8bf7\u8010\u5fc3\u7b49\u5f85");
+        textField1.setText("\u521b\u5efa\u6210\u529f\u8bf7\u8010\u5fc3\u7b49\u5f85\u73a9\u5bb6\u52a0\u5165.......");
         textField1.setFont(new Font("Microsoft YaHei UI", Font.BOLD | Font.ITALIC, 24));
         textField1.setForeground(new Color(0x999900));
 

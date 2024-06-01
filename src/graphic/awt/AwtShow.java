@@ -8,7 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class AwtShow {
-    public AwtShow(Chess chess){
+    public AwtShow(Chess chess, Thread userThread){
         Frame mFrame = new Frame("棋盘游戏");
         setCenterAndClose(mFrame, windowWidth, windowHeight);
         mFrame.setResizable(false); //设置窗口大小不可调
@@ -16,7 +16,8 @@ public class AwtShow {
         MyCanvas cv = new MyCanvas(chess, boardWidth);
 
         mFrame.add(cv);
-        MouseListener chessOnAwt = new ChessOnAwt(cv, chess);
+        MouseListener chessOnAwt = new graphic.awt.ChessOnAwt(cv, chess, userThread);
+
         cv.addMouseListener(chessOnAwt);
     }
     public static final int windowWidth = 960;
@@ -29,7 +30,6 @@ public class AwtShow {
         int scWidth = screenSize.width;
         int scHeight= screenSize.height;
         frame.setSize(width, height);
-        frame.setAlwaysOnTop(true); //后面可以去掉这行
         frame.setLocation((scWidth-width)/2, (scHeight-height)/2);
         frame.setVisible(true);
         frame.addWindowListener(new WindowAdapter() {
@@ -41,4 +41,3 @@ public class AwtShow {
         });
     }
 }
-

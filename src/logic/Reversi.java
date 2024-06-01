@@ -11,57 +11,32 @@ import java.util.List;
 public class Reversi extends Chess {
     @Override
     public Boolean isWin(int x, int y) {
-//        Boolean center = super.getTurn();
-////        boolean noMoveForCurrent = hasMovePieces(center ? 2 : 1, x, y);
-////        boolean noMoveForOpponent = hasMovePieces(center ? 1 : 2, x, y);
-////        if (noMoveForCurrent && noMoveForOpponent) {
-//        if (blackCount == whiteCount) {
-//            return null; // 平局
-//        } else if (!center && blackCount > whiteCount) {
-//            return true;
-//        } else if (center && whiteCount > blackCount) {
-//            return false;
+        return  null;
+        //黑白棋的判断胜负方法
+//        try {
+////            Boolean isBlackTurn = super.getTurn();// 假设getTurn返回当前是黑棋还是白棋
+//            if (isMovePositionOk(x,y)) {
+//                // 如果任何一方还有可下的棋，游戏未结束
+//                return null;
+//            }
+//            int blackCount = countPieces(true); // true 代表黑棋
+//            int whiteCount = countPieces(false); // false 代表白棋
+//
+//
+//            if (blackCount > whiteCount) {
+//                return true; // 黑方胜利
+//            } else if (whiteCount > blackCount) {
+//                return false; // 白方胜利
+//            } else {
+//                return null;// 未分胜负
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//
+//            return null;
 //        }
-////        }
-
-        //循环判断棋盘上每一个空位，如果有可以下的位置就跳出循环，返回null; 否则如果每个空位都判断不能下棋
-        //turn = !turn 判断另一方能不能下，。。。如果也不能下则游戏结束，清点各方棋子数
-
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                //如果有棋子，这个位置不判断
-                if (board[i][j] != null) continue;
-
-                if (isMovePositionOk(i, j)) { //有可以下的位置
-                    return null;
-                }
-            }
-        }
-        //执行到这个位置说明无子可下
-
-        turn = !turn; //交换回合判断对方
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                //如果有棋子，这个位置不判断
-                if (board[i][j] != null) continue;
-
-                if (isMovePositionOk(i, j)) { //有可以下的位置
-                    return null;
-                }
-            }
-        }
-        //执行到这个位置说明双方都无子可下
-
-        //清点棋子数判断胜负
-        int blackCount = countPieces(true); // true 代表黑棋
-        int whiteCount = countPieces(false); // false 代表白棋
-        if (blackCount > whiteCount) {
-            return true;
-        } else {
-            return false;
-        }
     }
-
 
     @Override
     public void moveDown(int x, int y) {
@@ -70,13 +45,13 @@ public class Reversi extends Chess {
         // 翻转
         List<Point> capturedPositions;
         capturedPositions = hasFlippablePieces(x, y);
+        //翻转记录的棋
         reverseCapturedPositions(capturedPositions);
     }
 
-
     @Override
     protected void initBoard(int row, int column) {
-        if (row == 0 && column == 0) {
+        if(row == 0 && column == 0) {
             // 如果未指定大小，使用默认值
             row = board.length;
             column = board[0].length;
@@ -92,20 +67,19 @@ public class Reversi extends Chess {
 
     @Override
     public boolean isMovePositionOk(int x, int y) {
-        if (!super.isMovePositionOk(x, y)) return false;
+        if(!super.isMovePositionOk(x, y)) return false;
         board[x][y] = turn;
         List<Point> sets = hasFlippablePieces(x, y);
-        if (sets.isEmpty()) {
+        if(sets.isEmpty()){
             board[x][y] = null;
             return false;
-        } else {
+        }else{
             board[x][y] = null;
             return true;
         }
     }
 
     private void reverseCapturedPositions(List<Point> capturedPositions) {
-
         for (Point position : capturedPositions) {
             //将改动过的棋子均放入操作链表里
             operations.getLast().add(new Operation(position, board[position.x][position.y]));
@@ -115,24 +89,11 @@ public class Reversi extends Chess {
         System.out.println("已经遍历翻转棋子");
     }
 
-    // 计算指定颜色的棋子数量
-    private int countPieces(Boolean color) {
-        int count = 0;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                if (board[i][j] == color) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
-
     private List<Point> hasFlippablePieces(int x, int y) {
         //返回可翻转点的集合
         List<Point> points = new ArrayList<>();
         List<Point> temp = new ArrayList<>();
+//        System.out.println(board[x][y]);
         Boolean center = board[x][y];
         int row = board.length;
         int column = board[0].length;
@@ -141,7 +102,10 @@ public class Reversi extends Chess {
             if (y + i < column && board[x][y + i] != null) {
                 if (!board[x][y + i].equals(center)) {
                     temp.add(new Point(x, y + i));
+                    System.out.println(board[x][y+i]+"  "+center);
+                    System.out.println("横向向右1个");
                 } else {//遇到相同棋子结束
+                    System.out.println(1);
                     points.addAll(temp);
                     break;
                 }
@@ -253,6 +217,5 @@ public class Reversi extends Chess {
         return points;
     }
 }
-
 
 

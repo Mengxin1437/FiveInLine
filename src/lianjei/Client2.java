@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.*;
 
-public class Client {
+public class Client2 {
     public static String clientIP;
     public static int clientPort;
     public static void main(String[] args) {
@@ -56,6 +56,7 @@ public class Client {
                 String numericPart = clientIP.substring(startIndex); // 提取从该索引开始的子字符串
                 System.out.println(numericPart);
 
+
                 Login login = new Login();
                 ActionEvent e=null;
                 if (login.radioButton1(e)) {
@@ -63,7 +64,7 @@ public class Client {
                     chess = new FiveInLine();
                     chess.init(19, 19);
 
-                Thread ClientThread = new ClientThread(numericPart, 8888,chess);
+                    Thread ClientThread = new ClientThread(numericPart, 8888,chess);
 
                     ClientThread.start();
                     // 关闭发送端
@@ -93,10 +94,11 @@ public class Client {
                     e.printStackTrace();
                 }
             }
-}  catch (UnknownHostException e) {
+        }  catch (UnknownHostException e) {
             e.printStackTrace();
         }
     }
 
 }
+
 

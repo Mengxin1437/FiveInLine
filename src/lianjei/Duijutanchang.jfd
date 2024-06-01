@@ -1,0 +1,26 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space ::118:x, par l {comp button1:::p:165:p, comp button2:::::x}, space :p:115:p}}"
+			"$verticalGroup": "par l {seq l {space :p:40:p, comp button1:::p:71:p, space :p:31:p, comp button2:::p:70:p, space ::57:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "加入对局"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jiaru", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "创建对局"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "chuangjian", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 180, 85 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

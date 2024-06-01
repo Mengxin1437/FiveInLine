@@ -6,6 +6,7 @@ package graphic.swing;
 
 import Xinxi.src.GameStorage;
 import lianjei.Client;
+import lianjei.Duijutanchang;
 import lianjei.Qidong;
 import lianjei.Server;
 
@@ -52,11 +53,9 @@ public class Login extends JFrame {
 
     private void juyuwangduizhan(ActionEvent e) {
         // TODO add your code here
-        new Qidong().setVisible(true);
-        Server server=new Server();
-        server.startServer();
-        Client client=new Client();
-        client.startClient();
+        
+        new Duijutanchang().setVisible(true);
+      
     }
 
     public boolean radioButton1(ActionEvent e) {
@@ -73,6 +72,7 @@ public class Login extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+        // Generated using JFormDesigner Evaluation license - 贾皓天
         panel1 = new JPanel();
         btnClose = new JButton();
         btnMinimize = new JButton();
@@ -104,6 +104,12 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setPreferredSize(new Dimension(300, 420));
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
             panel1.setLayout(null);
 
             //---- btnClose ----
@@ -304,6 +310,7 @@ public class Login extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    // Generated using JFormDesigner Evaluation license - 贾皓天
     private JPanel panel1;
     private JButton btnClose;
     private JButton btnMinimize;
