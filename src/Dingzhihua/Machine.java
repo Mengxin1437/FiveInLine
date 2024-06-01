@@ -11,7 +11,6 @@ public class Machine {
         this.chess = chess;
         this.center = center;
     }
-
     public static void main(String[] args) {
         Chess chess = new FiveInLine();
         Machine machine = new Machine(chess);
@@ -20,7 +19,7 @@ public class Machine {
 //输入人落子坐标 返回人机的坐标
     public void ai(int x,int y){
         board[x][y] = 1;//棋盘有子 ture是人 falee是人机b null为空
-        boolean center = ture;//人下的子
+        boolean center = Ture;//人下的子
         // 遍历整个棋盘 人机下  （1个子）
         int p = 0;
         if(p<1) {
@@ -32,9 +31,9 @@ public class Machine {
                 }
             }
           }
+        p=p+1;
         }
         //三个子
-
 
         center = board[x][y];
         int count = 0;
@@ -47,7 +46,6 @@ public class Machine {
                 break;
             }else{
                 count++;
-                board[x][y+i]=Ture;
             }
         }
         if(count >= 5){
@@ -55,7 +53,7 @@ public class Machine {
             return winner;
         }
         if(count>=3){
-            if (board[x][y+i] !=null)
+            if (board[x][y+i] =null)
                 board[x][y+i] =Ture;
         }
 
@@ -72,7 +70,7 @@ public class Machine {
             return winner;
         }
         if(count>=3){
-            if (board[x][y-i] !=null)
+            if (board[x][y-i] =null)
                 board[x][y-i] =Ture;
 
         }
@@ -93,7 +91,7 @@ public class Machine {
             return winner;
         }
         if(count>=3){
-            if (board[x+i][y] !=null)
+            if (board[x+i][y] =null)
                 board[x+i][y] =Ture;
         }
 
@@ -112,7 +110,7 @@ public class Machine {
         }
 
         if(count>=3){
-            if (board[x][y-i] !=null)
+            if (board[x][y-i] =null)
                 board[x][y-i] =Ture;
         }
 
@@ -133,7 +131,7 @@ public class Machine {
             return winner;
         }
         if(count>=3){
-            if (board[x+i][y+i] !=null)
+            if (board[x+i][y+i] =null)
                 board[x+i][y+i] =Ture;
         }
 
@@ -150,7 +148,7 @@ public class Machine {
             return winner;
         }
         if(count>=3){
-            if (board[x-i][y-i] !=null)
+            if (board[x-i][y-i] =null)
                 board[x-i][y-i] =Ture;
         }
 
@@ -169,7 +167,7 @@ public class Machine {
             return winner;
         }
         if(count>=3){
-            if (board[x+i][y-i] !=null)
+            if (board[x+i][y-i] =null)
                 board[x+i][y-i] =Ture;
         }
 
@@ -186,7 +184,7 @@ public class Machine {
             return winner;
         }
         if(count>=3){
-            if (board[x-i][y+i] !=null)
+            if (board[x-i][y+i] =null)
                 board[x-i][y+i] =Ture;
         }
 
